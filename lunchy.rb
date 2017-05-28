@@ -15,19 +15,22 @@
 
 #Buyer class, wallet class, Dishes class, main dish class, side dish class, extras
 class Buyer
-  attr_accessor :choices, :wallet
+  attr_accessor :wallet, :choices
 
-  def initialize(choices, wallet)
-    @choices = []
+  def initialize
     puts "How much money do you have?"
     print "> "
     @wallet = gets.strip.to_f
   end
+  def initialize(dish, price)
+    @choices = []
+  end
+
 
 end
 
 class Lunchy
-  attr_accessor :buyer
+  attr_accessor :buyer, :choices, :wallet
 
     def initialize
       @buyer = Buyer.new
@@ -48,7 +51,7 @@ class Lunchy
     main_dish_choice = gets.strip.to_i
     case main_dish_choice
     when 1
-      buyer.choices << Buyer.new("Burger", 7.50)
+      buyer.choices << Buyer("Burger", 7.50)
     when 2
       buyer.choices << Buyer.new("Chicken Salad", 7.00)
     when 3
@@ -61,6 +64,7 @@ class Lunchy
       puts "Not a valid choice, please try again!"
       main_dish
     end
+    main_dish
   end
 
   def print_array
