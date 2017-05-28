@@ -73,15 +73,28 @@ class Lunchy
       puts "Not a valid choice, please try again!"
       main_dish
     end
+    check_total
     main_dish
   end
 
+  def check_total
+    if buyer.choices.map(&:price).reduce(:+) > buyer.wallet
+      puts "Sorry, you don't have enough money. (1) to clear order or (2) to clear last entry."
+      case gets.strip.to_i
+      when 1
+        clear total
+      when 2
+        clear last
+      else
+        puts "Sorry try again!"
+        check_total
+  end
+
+  end
   def print_array
      buyer.choices.each do |choices|
- # binding.pry
-      puts "#{choices.dish} #{choices.price}"
-
-    end
+     puts "#{choices.dish} #{choices.price}"
+     end
   end
 end
 
