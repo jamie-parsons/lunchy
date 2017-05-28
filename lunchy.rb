@@ -78,16 +78,17 @@ class Lunchy
   end
 
   def check_total
-    if buyer.choices.map(&:price).reduce(:+) > buyer.wallet
+    if (buyer.choices.map(&:price).reduce(:+).to_f) > (buyer.wallet)
       puts "Sorry, you don't have enough money. (1) to clear order or (2) to clear last entry."
       case gets.strip.to_i
       when 1
-        clear total
+        buyer.choices.clear
       when 2
-        clear last
+        buyer.choices.pop
       else
         puts "Sorry try again!"
         check_total
+      end
   end
 
   end
