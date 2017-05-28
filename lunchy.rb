@@ -22,8 +22,8 @@ class Buyer
     puts "How much money do you have?"
     print "> "
     @wallet = gets.strip.to_f
-    menu
   end
+
 end
 
 class Lunchy
@@ -31,11 +31,12 @@ class Lunchy
 
     def initialize
       @buyer = Buyer.new
+      main_dish
     end
-end
-
-class Menu
-  attr_accessor :buyer
+# end
+#
+# class Menu
+#   attr_accessor :buyer
 
   def main_dish
     puts "Choose your main dish:"
@@ -47,11 +48,11 @@ class Menu
     main_dish_choice = gets.strip.to_i
     case main_dish_choice
     when 1
-      buyer.choices << main_dish.new("Burger", 7.50)
+      buyer.choices << Buyer.new("Burger", 7.50)
     when 2
-      buyer.choices << main_dish.new("Chicken Salad", 7.00)
+      buyer.choices << Buyer.new("Chicken Salad", 7.00)
     when 3
-      buyer.choices << main_dish.new("Veggie Bowl", 6.50)
+      buyer.choices << Buyer.new("Veggie Bowl", 6.50)
     when 4
       exit
     when 0
