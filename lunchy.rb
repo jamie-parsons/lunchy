@@ -18,16 +18,26 @@ class Buyer
   attr_accessor :wallet, :choices
 
   def initialize
+    @choices = []
+  end
+  # def choices(dish, price)
+  #   @choices = []
+  # end
+  def wallet
     puts "How much money do you have?"
     print "> "
     @wallet = gets.strip.to_f
   end
-  def initialize(dish, price)
-    @choices = []
-  end
-
-
 end
+
+class Dish
+  attr_accessor :dish, :price
+
+    def initialize(dish, price)
+      @dish
+      @price
+    end
+  end
 
 class Lunchy
   attr_accessor :buyer, :choices, :wallet
@@ -48,14 +58,13 @@ class Lunchy
     puts "3) Veggie Bowl, 6.50"
     puts "Enter 1, 2, or 3 for your choice, or 4 to quit."
     print "> "
-    main_dish_choice = gets.strip.to_i
-    case main_dish_choice
+    case gets.strip.to_i
     when 1
-      buyer.choices << Buyer("Burger", 7.50)
+      buyer.choices << Dish.new("Burger", 7.50)
     when 2
-      buyer.choices << Buyer.new("Chicken Salad", 7.00)
+      buyer.choices << Dish.new("Chicken Salad", 7.00)
     when 3
-      buyer.choices << Buyer.new("Veggie Bowl", 6.50)
+      buyer.choices << Dish.new("Veggie Bowl", 6.50)
     when 4
       exit
     when 0
@@ -68,9 +77,9 @@ class Lunchy
   end
 
   def print_array
-    @choices.each do |items|
-      puts items
-    end
+    # buyer.choices.each do |dish, price|
+      puts buyer.choices[@price]
+    # end
   end
 end
 
