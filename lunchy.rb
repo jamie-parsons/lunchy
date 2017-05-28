@@ -1,3 +1,4 @@
+require "Pry"
 # Basic Objectives:
 # - the user chooses from a list of main dishes
 # - the user chooses 2 side dish items
@@ -19,11 +20,10 @@ class Buyer
 
   def initialize
     @choices = []
-  end
   # def choices(dish, price)
   #   @choices = []
   # end
-  def wallet
+
     puts "How much money do you have?"
     print "> "
     @wallet = gets.strip.to_f
@@ -34,13 +34,13 @@ class Dish
   attr_accessor :dish, :price
 
     def initialize(dish, price)
-      @dish
-      @price
+      @dish = dish
+      @price = price
     end
   end
 
 class Lunchy
-  attr_accessor :buyer, :choices, :wallet
+  attr_accessor :buyer
 
     def initialize
       @buyer = Buyer.new
@@ -77,9 +77,11 @@ class Lunchy
   end
 
   def print_array
-    # buyer.choices.each do |dish, price|
-      puts buyer.choices[@price]
-    # end
+     buyer.choices.each do |choices|
+ # binding.pry
+      puts "#{choices.dish} #{choices.price}"
+
+    end
   end
 end
 
