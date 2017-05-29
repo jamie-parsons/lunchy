@@ -154,14 +154,16 @@ class Lunchy
   def finish_order
     buyer.choices.each do |choices|
     puts "You've ordered: #{choices.dish}"
-    puts "Your total is #{buyer.choices.map(&:price).reduce(:+).to_f}"
+    puts "Your total is #{sprintf("%0.02f", buyer.choices.map(&:price).reduce(:+).to_f)}"
     buyer.wallet = buyer.wallet - buyer.choices.map(&:price).reduce(:+).to_f
     puts "Your change is #{buyer.wallet}"
+  end
     puts "Thank you for your order!"
     puts "Enter (1) to place another order or (2) to leave."
     print "> "
     case gets.strip.to_i
     when 1
+      buyer.choices.clear
       main_dish
     when 2
       exit
@@ -178,6 +180,6 @@ class Lunchy
     puts "Total: #{buyer.choices.map(&:price).reduce(:+).to_f}"
   end
 end
-end
+
 
 Lunchy.new
