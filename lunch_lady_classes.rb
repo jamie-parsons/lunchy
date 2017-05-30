@@ -21,7 +21,7 @@ class Buyer
   def initialize
     @choices = []
     puts "How much money do you have?"
-    print "> "
+    print "> $"
     @wallet = gets.strip.to_f
   end
 end
@@ -47,9 +47,9 @@ class Lunchy
     puts "Choose your main dish:
 
 **********************************"
-    puts "1) Burger, 7.50"
-    puts "2) Chicken Salad, 7.00"
-    puts "3) Veggie Bowl, 6.50
+    puts "1) Burger, $7.50"
+    puts "2) Chicken Salad, $7.00"
+    puts "3) Veggie Bowl, $6.50
 **********************************"
 
     puts "\nEnter (1), (2), or (3) for your choice,
@@ -86,9 +86,9 @@ class Lunchy
     puts "Choose your side dish:
 
 **********************************"
-    puts "1) Red Soup, 1.50"
-    puts "2) Purple Soup, 5.25"
-    puts "3) Greenish Sludge, slightly fuzzy, 0.25
+    puts "1) Red Soup, $1.50"
+    puts "2) Purple Soup, $5.25"
+    puts "3) Greenish Sludge, slightly fuzzy, $0.25
 **********************************"
 
     puts "\nEnter (1), (2), or (3) for your choice,
@@ -153,31 +153,31 @@ class Lunchy
 
   def finish_order
     buyer.choices.each do |choices|
-    puts "You've ordered: #{choices.dish}"
-    puts "Your total is #{sprintf("%0.02f", buyer.choices.map(&:price).reduce(:+).to_f)}"
+    puts "You've ordered: #{buyer.choices.map(&:dish)}"
+    puts "Your total is $#{sprintf("%0.02f", buyer.choices.map(&:price).reduce(:+).to_f)}"
     buyer.wallet = buyer.wallet - buyer.choices.map(&:price).reduce(:+).to_f
-    puts "Your change is #{buyer.wallet}"
-  end
+    puts "Your change is $#{sprintf("%0.02f", buyer.wallet)}"
     puts "Thank you for your order!"
     puts "Enter (1) to place another order or (2) to leave."
     print "> "
     case gets.strip.to_i
-    when 1
-      buyer.choices.clear
-      main_dish
-    when 2
-      exit
-    else
-      puts "Please try again!"
-      finish
+      when 1
+        buyer.choices.clear
+        main_dish
+      when 2
+        exit
+      else
+        puts "Please try again!"
+        finish
+      end
     end
   end
 
   def print_array
      buyer.choices.each do |choices|
-     puts "#{choices.dish} #{choices.price}"
+     puts "#{choices.dish} $#{sprintf("%0.02f", choices.price)}"
      end
-    puts "Total: #{buyer.choices.map(&:price).reduce(:+).to_f}"
+    puts "Total: $#{sprintf("%0.02f", buyer.choices.map(&:price).reduce(:+).to_f)}"
   end
 end
 
